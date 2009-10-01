@@ -1,0 +1,106 @@
+plugin {
+
+  tx_ptjqueryui {
+  
+    # By default the complete jQuery UI library is included.
+    # If any single component is included the jQuery UI monolith is
+    # discarded and the jQuery core is included automatically.
+    version = 1.3.2
+    variant = compressed
+    position = head
+    
+    # Any inserted component requires the `jQuery UI core'
+    # which is then included automatically.
+    components {
+    
+      effects {
+      
+    	# Any inserted effect requires the `Effects core'
+    	# which is then included automatically.
+    	1 = blind
+    	2 = bounce
+    	3 = clip
+    	4 = drop
+    	5 = explode
+    	6 = fold
+    	7 = highlight
+    	8 = pulsate
+    	9 = scale
+    	10 = shake
+    	11 = slide
+    	12 = transfer
+    	
+      }
+      
+      interactions {
+      
+    	1 = draggable
+    	2 = droppable
+    	3 = resizable
+    	4 = selectable
+    	5 = sortable
+    	
+      }
+      
+      widgets {
+      
+    	1 = accordion
+    	2 = datepicker
+    	3 = dialog
+    	4 = progressbar
+    	5 = slider
+    	6 = tabs
+    	
+      }
+    }
+    
+    # Languages are independent components
+    languages {
+    
+      1 = ar
+      2 = bg
+      3 = ca
+      4 = cs
+      5 = da
+      6 = de
+      7 = el
+      8 = eo
+      9 = es
+      10 = fa
+      11 = fi
+      12 = fr
+      13 = he
+      14 = hr
+      15 = hu
+      16 = hy
+      18 = id
+      19 = is
+      20 = it
+      21 = ja
+      22 = ko
+      23 = lt
+      24 = lv
+      25 = ms
+      26 = nl
+      27 = no
+      28 = pl
+      29 = pt-BR
+      30 = ro
+      31 = ru
+      32 = sk
+      33 = sl
+      34 = sq
+      35 = sr
+      36 = sr-SR
+      37 = sv
+      38 = th
+      39 = tr
+      40 = uk
+      41 = zh-CN
+      42 = zh-TW
+      
+    }
+    
+  }
+  
+}

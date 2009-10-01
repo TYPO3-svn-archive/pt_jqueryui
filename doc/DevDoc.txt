@@ -1,0 +1,28 @@
+********************************************************************************
+DevDoc.txt: Development notes
+Author: Joachim Mathes, Michael Knoll
+
+Legend:
+
+FIX: fixes a bug
+CHG: inform about changed items
+ADD: added feature
+RMV: removed Item
+RFT: refactoring / code cleanup
+********************************************************************************
+
+
+
+ToDo: As of 01.10.2009
+======================
+
+
+
+Version: 0.0.1-dev
+==================
+
++ (ry21) RMV: Removed kickstarter files
++ (ry21) ADD: Added this document
++ (ry28) ADD: New workflow structure in main and respective methods.
++ (ry28) ADD: Code is based on the 'jquery' and 'jsmanager' extensions by Joerg Schoppet. 
++ (ry28) ADD: initial code generated with kickstarter
