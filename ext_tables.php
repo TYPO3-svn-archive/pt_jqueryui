@@ -28,24 +28,22 @@
 
 
 /**
- * Configuration file for pt_jqueryui
- * 
- * @author    Michael Knoll <knoll@punkt.de>
- * @since     2009-10-01
- * @version   $Id:$
+ * Configuration file for tx_ptjqueryui
+ *
+ * @package		TYPO3
+ * @subpackage	pt_jqueryui
+ * @author		Michael Knoll <knoll@punkt.de>
+ * @version		$Id:$
  */
 
-if (!defined ('TYPO3_MODE')) {
- 	die ('Access denied.');
-}
+if (!defined('TYPO3_MODE')) {
+	die ('Access denied.');
+} // if (!defined('TYPO3_MODE'))
 
 
-// Add JS Manager to static template
-t3lib_extMgm::addPItoST43(
-    $_EXTKEY,                                   // Extension key 
-    'res/class.tx_ptjqueryui_manager.php',      // File to include (relative to extension root)
-    '_manager',                                 // Prefix of included file
-    '',                                         // Type of inclusion to static template (list_type in this case)
-    1);                                         // Activate caching, as this changes only, if TS changes --> cache is deleted
-    
+// Add static template for JS-Manager plugin
+t3lib_extMgm::addStaticFile(
+	$_EXTKEY,
+	'typoscript/', '[pt_jquery] JS Manager'
+);
 ?>

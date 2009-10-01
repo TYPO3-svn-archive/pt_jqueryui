@@ -21,13 +21,23 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
+
+
 /**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- *
- * Hint: use extdeveval to insert/update function index above.
+ * Class definition file for jquery extension main class
+ * @author Joachim Mathes <mathes@punkt.de>, Michael Knoll <knoll@punkt.de>
+ * @since 2009-10-01
+ * @version $Id:$
  */
 
+
+
+/**
+ * Inclusion of external ressources
+ */
 require_once(PATH_tslib.'class.tslib_pibase.php');
+
 
 
 /**
@@ -35,15 +45,24 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  *
  * @author        Joachim Mathes <mathes@punkt.de>
  * @since         2009-07-23
- * @package       TYPO3
- * @subpackage    tx_ptjqueryui
+ * @package       Typo3
+ * @subpackage    pt_jqueryui
  */
 class tx_ptjqueryui extends tslib_pibase {
+	
+	
+	
+	/*****************************************************************************
+     * Properties
+     *****************************************************************************/
+
     protected $prefixId      = 'tx_ptjqueryui';           // Same as class name
     protected $scriptRelPath = 'class.tx_ptjqueryui.php'; // Path to this script relative to the extension dir.
     protected $extKey        = 'pt_jqueryui';             // The extension key.
     protected $pi_checkCHash = true;
 
+    
+    
     /**
      * Holds the JavaScript tags to insert into the page header.
      *
@@ -51,6 +70,8 @@ class tx_ptjqueryui extends tslib_pibase {
      */
     protected $JSTags = array();
 
+    
+    
     /**
      * Holds the components configuration.
      *
@@ -72,6 +93,11 @@ class tx_ptjqueryui extends tslib_pibase {
 					     );
 
 
+					     
+					     
+    /*****************************************************************************
+     * Main methods
+     *****************************************************************************/
 
     /**
      * The main method of the PlugIn
@@ -83,14 +109,18 @@ class tx_ptjqueryui extends tslib_pibase {
      * @since     2009-07-23
      */
     public function main($content, $conf) {
-
-	$this->conf = $conf;
 	
-	$this->getConfiguration();
-	$this->getData();
-	$content .= $this->setData();
-
-	return $content;
+    	/*
+		$this->conf = $conf;
+		
+		$this->getConfiguration();
+		$this->getData();
+		$content .= $this->setData();
+	
+		return $content;
+*/
+    	return "Hallo Welt!";
+		
     }
    
 
@@ -103,151 +133,149 @@ class tx_ptjqueryui extends tslib_pibase {
      * @since     2009-07-23
      */
     protected function getConfiguration() {
-
-	// Check where JavaScript tags shall be positioned:
-	//  - head (default)
-	//  - body
-	if (array_key_exists('position', $this->conf) &&
-	    strcasecmp($this->conf['position'], 'body') == 0) {
-
-	    $this->JQueryUIConfiguration['position'] = $this->conf['position'];
-	} 
-
+	
+		// Check where JavaScript tags shall be positioned:
+		//  - head (default)
+		//  - body
+		if (array_key_exists('position', $this->conf) &&
+		    strcasecmp($this->conf['position'], 'body') == 0) {
+	
+		    $this->JQueryUIConfiguration['position'] = $this->conf['position'];
+		} 
+	
         // Check which version shall be included.
         // Default: latest version.
         $availableVersions = $this->getJQueryUIVersions();
-	$this->JQueryUIConfiguration['version'] = $availableVersions[count($availableVersions) - 1];
-
-	if (array_key_exists('version', $this->conf)) {
-
-	    if (strcasecmp($this->conf['version'], 'max') == 0) {
 		$this->JQueryUIConfiguration['version'] = $availableVersions[count($availableVersions) - 1];
-	    } else {
-		
-		if (in_array($this->conf['version'], $availableVersions)) {
-		    $this->JQueryUIConfiguration['version'] = $this->conf['version'];
-		} else {
-		    $this->JQueryUIConfiguration['version'] = $availableVersions[count($availableVersions) - 1];
+	
+		if (array_key_exists('version', $this->conf)) {
+	
+		    if (strcasecmp($this->conf['version'], 'max') == 0) {
+			$this->JQueryUIConfiguration['version'] = $availableVersions[count($availableVersions) - 1];
+		    } else {
+			
+			if (in_array($this->conf['version'], $availableVersions)) {
+			    $this->JQueryUIConfiguration['version'] = $this->conf['version'];
+			} else {
+			    $this->JQueryUIConfiguration['version'] = $availableVersions[count($availableVersions) - 1];
+			}
+	
+		    }
 		}
-
-	    }
-	}
-
-	// Check which JQuery UI variant shall be used.
-	// Fallback: 1. normal
-	//           2. minimized
-	$possibleVariants = array('normal', 'minimized');
-	$availableVariants = $this->getJQueryUIVariants($version);
-	$variant = '';
-
-	if (array_key_exists('variant', $this->conf)) {
-
-	    if (array_key_exists($this->conf['variant'], $availableVariants)) {
-		$variant = $this->conf['variant'];
-		$this->JQeryUIConfiguration['jqui'] = $availableVariants[$this->conf['variant']];
-	    }
-
-	}
-
-	if ($variant == '') {
-
-	    foreach ($possibleVariants as $variant) {
-		if (array_key_exists($variant, $availableVariants)) {
-		    $this->JQeryUIConfiguration['jqui'] = $availableVariants[$variant];
-		    break;
-		} 
-	    }
-
-	}
-
-
-	// Check which JQuery variant shall be used.
-	// Fallback: 1. normal
-	//           2. minimized
-	$possibleVariants = array('normal', 'minimized');
-	$availableVariants = $this->getJQueryUIVariants($version);
-	$variant = '';
-
-	if (array_key_exists('variant', $this->conf)) {
-
-	    if (array_key_exists($this->conf['variant'], $availableVariants)) {
-		$variant = $this->conf['variant'];
-		$this->JQeryUIConfiguration['jq'] = $availableVariants[$this->conf['variant']];
-	    }
-
-	}
-
-	if ($variant == '') {
-
-	    foreach ($possibleVariants as $variant) {
-		if (array_key_exists($variant, $availableVariants)) {
-		    $this->JQeryUIConfiguration['jq'] = $availableVariants[$variant];
-		    break;
-		} 
-	    }
-
-	}
-
-
-	// Check which components shall be included.
-	// Check for:
-	//  - Effects
-	//  - Interactions
-	//  - Widgets
-	if (array_key_exists('components.', $this->conf)) {
-		
-	    // Effects
-	    if (array_key_exists('effects.', $this->conf['components.']) && 
-		is_array($this->conf['components.']['effects.'])) {
-            
-		foreach ($this->conf['components.']['effects.'] as $number){
-		    $this->JQueryUIConfiguration['components']['effects'][] = $this->conf['components.']['effects.'][$number];
+	
+		// Check which JQuery UI variant shall be used.
+		// Fallback: 1. normal
+		//           2. minimized
+		$possibleVariants = array('normal', 'minimized');
+		$availableVariants = $this->getJQueryUIVariants($version);
+		$variant = '';
+	
+		if (array_key_exists('variant', $this->conf)) {
+	
+		    if (array_key_exists($this->conf['variant'], $availableVariants)) {
+				$variant = $this->conf['variant'];
+				$this->JQeryUIConfiguration['jqui'] = $availableVariants[$this->conf['variant']];
+		    }
+	
 		}
-	    }
-
-	    // Interactions
-	    if (array_key_exists('interactions.', $this->conf['components.']) && 
-		is_array($this->conf['components.']['interactions.'])) {
-            
-		foreach ($this->conf['components.']['interactions.'] as $number){
-		    $this->JQueryUIConfiguration['components']['interactions'][] = $this->conf['components.']['interactions.'][$number];
+	
+		if ($variant == '') {
+	
+		    foreach ($possibleVariants as $variant) {
+				if (array_key_exists($variant, $availableVariants)) {
+				    $this->JQeryUIConfiguration['jqui'] = $availableVariants[$variant];
+				    break;
+				} 
+		    }
+	
 		}
-	    }
-
-	    // Widgets
-	    if (array_key_exists('widgets.', $this->conf['components.']) && 
-		is_array($this->conf['components.']['widgets.'])) {
-            
-		foreach ($this->conf['components.']['widgets.'] as $number){
-		    $this->JQueryUIConfiguration['components']['widgets'][] = $this->conf['components.']['widgets.'][$number];
+	
+	
+		// Check which JQuery variant shall be used.
+		// Fallback: 1. normal
+		//           2. minimized
+		$possibleVariants = array('normal', 'minimized');
+		$availableVariants = $this->getJQueryUIVariants($version);
+		$variant = '';
+	
+		if (array_key_exists('variant', $this->conf)) {
+	
+		    if (array_key_exists($this->conf['variant'], $availableVariants)) {
+				$variant = $this->conf['variant'];
+				$this->JQeryUIConfiguration['jq'] = $availableVariants[$this->conf['variant']];
+		    }
+	
 		}
-	    }
-
-        
-	    // Check which languages shall be included.
-	    if (array_key_exists('languages.', $this->conf) &&
- 		is_array($this->conf['languages.'])) {
-            
-		foreach ($this->conf['languages.'] as $number){
-		    $this->JQueryUIConfiguration['components']['languages'][] = $this->conf['languages.'][$number];
+	
+		if ($variant == '') {
+	
+		    foreach ($possibleVariants as $variant) {
+				if (array_key_exists($variant, $availableVariants)) {
+				    $this->JQeryUIConfiguration['jq'] = $availableVariants[$variant];
+				    break;
+				} 
+		    }
+	
 		}
-	    }
-	}
-
-
-	// Check which languages shall be included.
-        $availableLanguages = $this->getJQueryUILanguages();
-
-	if (array_key_exists('languages.', $this->conf)) {
-
-	    foreach ($this->conf['languages.'] as $language){
-
-		if (array_key_exists($language, $availableLanguages)) {
-		    $this->JQueryUIConfiguration['languages'][] = $availableLanguages[$language];
+	
+	
+		// Check which components shall be included.
+		// Check for:
+		//  - Effects
+		//  - Interactions
+		//  - Widgets
+		if (array_key_exists('components.', $this->conf)) {
+			
+		    // Effects
+		    if (array_key_exists('effects.', $this->conf['components.']) && 
+			is_array($this->conf['components.']['effects.'])) {
+	            
+				foreach ($this->conf['components.']['effects.'] as $number){
+				    $this->JQueryUIConfiguration['components']['effects'][] = $this->conf['components.']['effects.'][$number];
+				}
+		    }
+	
+		    // Interactions
+		    if (array_key_exists('interactions.', $this->conf['components.']) && 
+			is_array($this->conf['components.']['interactions.'])) {
+		            
+				foreach ($this->conf['components.']['interactions.'] as $number){
+				    $this->JQueryUIConfiguration['components']['interactions'][] = $this->conf['components.']['interactions.'][$number];
+				}
+		    }
+	
+		    // Widgets
+		    if (array_key_exists('widgets.', $this->conf['components.']) && 
+			is_array($this->conf['components.']['widgets.'])) {
+		            
+				foreach ($this->conf['components.']['widgets.'] as $number){
+				    $this->JQueryUIConfiguration['components']['widgets'][] = $this->conf['components.']['widgets.'][$number];
+				}
+		    }
+	
+	        
+		    // Check which languages shall be included.
+		    if (array_key_exists('languages.', $this->conf) &&
+	 		is_array($this->conf['languages.'])) {
+		            
+				foreach ($this->conf['languages.'] as $number){
+				    $this->JQueryUIConfiguration['components']['languages'][] = $this->conf['languages.'][$number];
+				}
+		    }
 		}
-
-	    }
-	}
+	
+	
+		// Check which languages shall be included.
+	        $availableLanguages = $this->getJQueryUILanguages();
+	
+		if (array_key_exists('languages.', $this->conf)) {
+	
+		    foreach ($this->conf['languages.'] as $language){
+				if (array_key_exists($language, $availableLanguages)) {
+				    $this->JQueryUIConfiguration['languages'][] = $availableLanguages[$language];
+				}
+		    }
+		}
     }
 
 
@@ -274,49 +302,49 @@ class tx_ptjqueryui extends tslib_pibase {
      */
     protected function getData() {
 	
-	$data = '';
-
-	// Include jQuery library
-	$data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . '/' . $this->JQueryUIConfiguration['jq'] . '"></script>' . "\n";
+		$data = '';
 	
-	// Check components
-	if (empty($this->JQueryUIConfiguration['components']['effects']) &&
-	    empty($this->JQueryUIConfiguration['components']['interactions']) &&
-	    empty($this->JQueryUIConfiguration['components']['widgets'])) {
-
-	    // Include monolithic jQuery and jQuery UI library.
-	    $data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . '/' . $this->JQueryUIConfiguration['jqui'] . '"></script>' . "\n";
-	}
-	else {
-
-	    // Include jQuery components
-	    foreach ($this->JQueryUIConfiguration['components'] as $key => $value) {
-
-		if (!empty($value)) {
-
-		    foreach ($value as $component) {
-			$data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . $this->JQueryUIConfiguration['components'][$key][$component] . '"></script>' . "\n";
-		    } 
+		// Include jQuery library
+		$data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . '/' . $this->JQueryUIConfiguration['jq'] . '"></script>' . "\n";
+		
+		// Check components
+		if (empty($this->JQueryUIConfiguration['components']['effects']) &&
+		    empty($this->JQueryUIConfiguration['components']['interactions']) &&
+		    empty($this->JQueryUIConfiguration['components']['widgets'])) {
+	
+		    // Include monolithic jQuery and jQuery UI library.
+		    $data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . '/' . $this->JQueryUIConfiguration['jqui'] . '"></script>' . "\n";
 		}
-	    }
-	}
-
-	// Check languages
-	if (empty($this->JQueryUIConfiguration['languages'])) {
-	    
-	    // Include monolithic jQuery language library.
-	    $data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . '/languages/i18n.js"></script>' . "\n";
-	}
-	else {
-
-	    // Include individual jQuery files
-	    foreach ($this->JQueryUIConfiguration['languages'] as $language) {
-		$data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . '/languages/' . $this->JQueryUIConfiguration['languages'][$language] . '"></script>' . "\n";
-	    } 
-
-	}
-
-	$this->data = $data;
+		else {
+	
+		    // Include jQuery components
+		    foreach ($this->JQueryUIConfiguration['components'] as $key => $value) {
+		
+				if (!empty($value)) {
+		
+				    foreach ($value as $component) {
+					    $data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . $this->JQueryUIConfiguration['components'][$key][$component] . '"></script>' . "\n";
+				    } 
+				}
+		    }
+		}
+	
+		// Check languages
+		if (empty($this->JQueryUIConfiguration['languages'])) {
+		    
+		    // Include monolithic jQuery language library.
+		    $data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . '/languages/i18n.js"></script>' . "\n";
+		}
+		else {
+	
+		    // Include individual jQuery files
+		    foreach ($this->JQueryUIConfiguration['languages'] as $language) {
+			    $data .= '<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('pt_jqueryui') . 'versions/' . $this->JQueryUIConfiguration['version'] . '/languages/' . $this->JQueryUIConfiguration['languages'][$language] . '"></script>' . "\n";
+		    } 
+	
+		}
+	
+		$this->data = $data;
     }
 
 
@@ -335,20 +363,21 @@ class tx_ptjqueryui extends tslib_pibase {
      */
     protected function setData() {
 
-	$content = '';
-
-        switch($this->position) {
-        case 'head':
-            $GLOBALS['TSFE']->additionalJavaScript[$this->extKey] = implode("\n", $this->data);
-            break;
-	case 'body':
-	    $content = implode("\n", $this->data);
-	    break;
-	default:
-	    $GLOBALS['TSFE']->additionalJavaScript[$this->extKey] = implode("\n", $this->data);
-        }
+		$content = '';
 	
-	return $content;
+	        switch($this->position) {
+		        case 'head':
+		            $GLOBALS['TSFE']->additionalJavaScript[$this->extKey] = implode("\n", $this->data);
+		            break;
+				case 'body':
+				    $content = implode("\n", $this->data);
+				    break;
+				default:
+				    $GLOBALS['TSFE']->additionalJavaScript[$this->extKey] = implode("\n", $this->data);
+	        }
+		
+		return $content;
+		
     }
 
 
@@ -360,24 +389,25 @@ class tx_ptjqueryui extends tslib_pibase {
      * to be named like
      * <directory> ::= <number>(.<number>)*
      *
-     * return     array    versions
+     * @return    array    versions
      * @author    Joachim Mathes <mathes@punkt.de>
      * @since     2009-07-23
      */
     protected function getJQueryUIVersions() {
 
-	$versions = array();
-	$files = new DirectoryIterator(t3lib_extMgm::extPath('pt_jqueryui', 'versions'));
-
-	foreach ($files as $file) {
-	    if ($file->isDir() && !$file->isDot()){
-		$versions[] = $file->getFilename();
-	    }
-	}
-
-	sort($versions);
-
-	return $versions;
+		$versions = array();
+		$files = new DirectoryIterator(t3lib_extMgm::extPath('pt_jqueryui', 'versions'));
+	
+		foreach ($files as $file) {
+		    if ($file->isDir() && !$file->isDot()){
+			    $versions[] = $file->getFilename();
+		    }
+		}
+	
+		sort($versions);
+	
+		return $versions;
+		
     }
 
 
@@ -393,27 +423,28 @@ class tx_ptjqueryui extends tslib_pibase {
      */
     protected function getJQueryUIVariants($version) {
 
-	$possibleVariants = array(
-				  'normal' => '.',
-				  'minimized' => '.min.',
-				  );
-	$variants = array();
-	$files = new DirectoryIterator(t3lib_extMgm::extPath('pt_jqueryui', 'versions/' . $version));
-	
+		$possibleVariants = array(
+					  'normal' => '.',
+					  'minimized' => '.min.',
+					  );
+		$variants = array();
+		$files = new DirectoryIterator(t3lib_extMgm::extPath('pt_jqueryui', 'versions/' . $version));
+		
         foreach ($files as $file) {
             if ($file->isFile()) {
-                $fileName = $file->getFilename();
-		$fileName = str_replace('jquery-ui', '', $fileName);
-		$fileName = str_replace('js', '', $fileName);
-		$variant = array_search($fileName, $possibleVariants);
-		
-		if ($variant) {
-		    $variants[$variant] = $entry->getFilename();
-		}
-            }
+		        $fileName = $file->getFilename();
+				$fileName = str_replace('jquery-ui', '', $fileName);
+				$fileName = str_replace('js', '', $fileName);
+				$variant = array_search($fileName, $possibleVariants);
+				
+				if ($variant) {
+				    $variants[$variant] = $entry->getFilename();
+				}
+		    }
         }
-
-	return $variants;
+	
+		return $variants;
+		
     }
 
 
@@ -428,27 +459,28 @@ class tx_ptjqueryui extends tslib_pibase {
      */
     protected function getJQueryVariants($version) {
 
-	$possibleVariants = array(
-				  'normal' => '.',
-				  'minimized' => '.min.',
-				  );
-	$variants = array();
-	$files = new DirectoryIterator(t3lib_extMgm::extPath('pt_jqueryui', 'versions/' . $version));
-	
+		$possibleVariants = array(
+					  'normal' => '.',
+					  'minimized' => '.min.',
+					  );
+		$variants = array();
+		$files = new DirectoryIterator(t3lib_extMgm::extPath('pt_jqueryui', 'versions/' . $version));
+		
         foreach ($files as $file) {
             if ($file->isFile()) {
                 $fileName = $file->getFilename();
-		$fileName = str_replace('jquery', '', $fileName);
-		$fileName = str_replace('js', '', $fileName);
-		$variant = array_search($fileName, $possibleVariants);
-		
-		if ($variant) {
-		    $variants[$variant] = $entry->getFilename();
-		}
-            }
+				$fileName = str_replace('jquery', '', $fileName);
+				$fileName = str_replace('js', '', $fileName);
+				$variant = array_search($fileName, $possibleVariants);
+				
+				if ($variant) {
+				    $variants[$variant] = $entry->getFilename();
+				}
+		    }
         }
-
-	return $variants;
+	
+		return $variants;
+		
     }
 
 
@@ -466,20 +498,20 @@ class tx_ptjqueryui extends tslib_pibase {
      */
     protected function getJQueryUILanguages($version) {
 
-	$languages = array();
-	$files = new DirectoryIterator(t3lib_extMgm::extPath('pt_jqueryui', 'versions/' . $version . '/languages'));
-	
+		$languages = array();
+		$files = new DirectoryIterator(t3lib_extMgm::extPath('pt_jqueryui', 'versions/' . $version . '/languages'));
+		
         foreach ($files as $file) {
             if ($file->isFile()) {
-		$fileName = $file->getFilename();
-		$fileName = str_replace('.js', '', $fileName);
-		$languages[$filename] = $file->getFilename();
+				$fileName = $file->getFilename();
+				$fileName = str_replace('.js', '', $fileName);
+				$languages[$filename] = $file->getFilename();
             }
         }
-
-	return $languages;
+	
+		return $languages;
+		
     }
-
 
 }
 

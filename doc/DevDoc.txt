@@ -21,6 +21,7 @@ ToDo: As of 01.10.2009
 Version: 0.0.1-dev
 ==================
 
++ (ry21) ADD: Added 'typoscript' directory to put all TS in
 + (ry21) RMV: Removed kickstarter files
 + (ry21) ADD: Added this document
 + (ry28) ADD: New workflow structure in main and respective methods.

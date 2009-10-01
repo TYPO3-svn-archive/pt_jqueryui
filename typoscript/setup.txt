@@ -104,3 +104,6 @@ plugin {
   }
   
 }
+
+# Add TS configuration to page
+page.1 = < plugin.tx_ptjqueryui_manager
