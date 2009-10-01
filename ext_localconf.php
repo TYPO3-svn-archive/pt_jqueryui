@@ -45,7 +45,7 @@ t3lib_extMgm::addPItoST43(
     $_EXTKEY,                                   // Extension key 
     'res/class.tx_ptjqueryui_manager.php',      // File to include (relative to extension root)
     '_manager',                                 // Prefix of included file
-    '',                                         // Type of inclusion to static template (list_type in this case)
-    1);                                         // Activate caching, as this changes only, if TS changes --> cache is deleted
+    'list_type',                                // Type of inclusion to static template (list_type in this case)
+    0);                                         // TODO Activate caching, as this changes only, if TS changes --> cache is deleted
     
 ?>

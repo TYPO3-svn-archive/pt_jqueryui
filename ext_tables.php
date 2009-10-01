@@ -41,7 +41,7 @@ if (!defined('TYPO3_MODE')) {
 } // if (!defined('TYPO3_MODE'))
 
 
-// Add static template for JS-Manager plugin
+// Add static TS template for JS-Manager plugin
 t3lib_extMgm::addStaticFile(
 	$_EXTKEY,
 	'typoscript/', '[pt_jquery] JS Manager'

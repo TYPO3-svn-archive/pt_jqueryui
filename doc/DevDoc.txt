@@ -16,11 +16,16 @@ RFT: refactoring / code cleanup
 ToDo: As of 01.10.2009
 ======================
 
+- (ry21) Check for an alternative to output plugin content via page.1 as this could be overwritten by another plugin
+- (ry21) Add assertions for all file operations
+
 
 
 Version: 0.0.1-dev
 ==================
 
++ (ry21) ADD: Changed configuration files such that plugin is registered to Static Template
++ (ry21) RFT: Added 'res' directory to put all classes in
 + (ry21) ADD: Added 'typoscript' directory to put all TS in
 + (ry21) RMV: Removed kickstarter files
 + (ry21) ADD: Added this document
