@@ -12,12 +12,12 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'jQuery User Interface',
-	'description' => 'The User Interface Library for jQuery.',
+	'description' => 'User Interface Library for jQuery',
 	'category' => 'plugin',
 	'author' => 'Joachim Mathes',
 	'author_email' => 'mathes@punkt.de',
 	'shy' => '',
-	'dependencies' => '',
+	'dependencies' => 'pt_tools',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
@@ -28,10 +28,11 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'author_company' => '',
-	'version' => '0.1.0',
+    'author_company' => 'punkt.de GmbH',
+	'version' => '0.0.1dev',
 	'constraints' => array(
 		'depends' => array(
+            'pt_tools' => '0.4.2-',
 		),
 		'conflicts' => array(
 		),

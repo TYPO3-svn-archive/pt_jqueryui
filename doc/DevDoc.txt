@@ -1,6 +1,6 @@
 ********************************************************************************
 DevDoc.txt: Development notes
-Author: Joachim Mathes, Michael Knoll
+Author: Joachim Mathes, Michael Knoll, Rainer Kuhn
 
 Legend:
 
@@ -13,22 +13,23 @@ RFT: refactoring / code cleanup
 
 
 
-ToDo: As of 01.10.2009
+ToDo: As of 02.10.2009
 ======================
 
-- (ry21) Check for an alternative to output plugin content via page.1 as this could be overwritten by another plugin
-- (ry21) Add assertions for all file operations
+- (mk) Check for an alternative to output plugin content via page.1 as this could be overwritten by another plugin
+- (mk) Add assertions for all file operations
 
 
 
-Version: 0.0.1-dev
-==================
+Version: 0.0.1dev
+=================
 
-+ (ry21) ADD: Changed configuration files such that plugin is registered to Static Template
-+ (ry21) RFT: Added 'res' directory to put all classes in
-+ (ry21) ADD: Added 'typoscript' directory to put all TS in
-+ (ry21) RMV: Removed kickstarter files
-+ (ry21) ADD: Added this document
-+ (ry28) ADD: New workflow structure in main and respective methods.
-+ (ry28) ADD: Code is based on the 'jquery' and 'jsmanager' extensions by Joerg Schoppet. 
-+ (ry28) ADD: initial code generated with kickstarter
++ (rk) FIX: ext_emconf.php: corrected version number and added pt_tools dependency
++ (mk) ADD: Changed configuration files such that plugin is registered to Static Template
++ (mk) RFT: Added 'res' directory to put all classes in
++ (mk) ADD: Added 'typoscript' directory to put all TS in
++ (mk) RMV: Removed kickstarter files
++ (mk) ADD: Added this document
++ (jm) ADD: New workflow structure in main and respective methods.
++ (jm) ADD: Code is based on the 'jquery' and 'jsmanager' extensions by Joerg Schoppet. 
++ (jm) ADD: initial code generated with kickstarter
