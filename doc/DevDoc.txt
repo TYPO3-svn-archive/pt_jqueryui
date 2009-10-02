@@ -18,12 +18,27 @@ ToDo: As of 02.10.2009
 
 - (mk) Check for an alternative to output plugin content via page.1 as this could be overwritten by another plugin
 - (mk) Add assertions for all file operations
+- (ry21) Add possibility to add JQuery CSS files
+- (ry21) Add possibility to let multiple Extensions define their jQuery requirements.
+         Here is an idea on how to do that:
+         1. Introduce a TS key plugin.tx_ptjqueryui_manager.extConfigs.<ext_key>
+         2. Read all these configurations and merge them in one array
+         3. Initialize actual manager with this merged array as configuration
 
 
 
 Version: 0.0.1dev
 =================
 
++ (ry21) ADD: Added dependency for pt_tools extension
++ (ry21) ADD: Changed configuration files such that plugin is registered to Static Template
++ (ry21) RFT: Added 'res' directory to put all classes in
++ (ry21) ADD: Added 'typoscript' directory to put all TS in
++ (ry21) RMV: Removed kickstarter files
++ (ry21) ADD: Added this document
++ (ry28) ADD: New workflow structure in main and respective methods.
++ (ry28) ADD: Code is based on the 'jquery' and 'jsmanager' extensions by Joerg Schoppet. 
++ (ry28) ADD: initial code generated with kickstarter=======
 + (rk) FIX: ext_emconf.php: corrected version number and added pt_tools dependency
 + (mk) ADD: Changed configuration files such that plugin is registered to Static Template
 + (mk) RFT: Added 'res' directory to put all classes in
