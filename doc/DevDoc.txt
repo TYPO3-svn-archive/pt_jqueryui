@@ -1,6 +1,6 @@
 ********************************************************************************
 DevDoc.txt: Development notes
-Author: Joachim Mathes, Michael Knoll, Rainer Kuhn
+Author: Joachim Mathes, Michael Knoll, Rainer Kuhn et.al.
 
 Legend:
 
@@ -13,7 +13,7 @@ RFT: refactoring / code cleanup
 
 
 
-ToDo: As of 02.10.2009
+ToDo: As of 26.10.2009
 ======================
 
 - (mk) Check for an alternative to output plugin content via page.1 as this could be overwritten by another plugin
@@ -26,9 +26,18 @@ ToDo: As of 02.10.2009
          3. Initialize actual manager with this merged array as configuration
 
 
+v0.0.2dev:
+---------
 
-Version: 0.0.1dev
-=================
+
+
+
+
+
+
+
+v0.0.1:  [used for online project 26.10.09]
+-------
 
 + (ry21) ADD: Added dependency for pt_tools extension
 + (ry21) ADD: Changed configuration files such that plugin is registered to Static Template
